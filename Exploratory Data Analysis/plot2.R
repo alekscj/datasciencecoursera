@@ -11,10 +11,9 @@ rel_data <- rbind(split_data$`1/2/2007`, split_data$`2/2/2007`)
 
 
 ### Converting from given label to date format in R and splitting the data in weekdays: 
-for (i in 1:length(rel_data$Date)){
-    
-}
+
 #date_converted <- weekdays(as.Date(rel_data$Date))
-time_converted <- strptime(paste(as.character(rel_data$Date), " ", as.character(rel_data$Time)), format="%Y-%m-%d %H:%M:%S")
+time_converted <- strptime( as.character(rel_data$Time), "%H:%M:%S")
+time_converted <- format(time_converted, "%H:%M:%S")
 #rel_data <- cbind(date_converted, time_converted, rel_data[, 3:9])
 #weekday_data <- split(rel_data,rel_data$date_converted)
