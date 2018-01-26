@@ -1,6 +1,5 @@
 #setwd("datasciencecoursera/Exploratory Data Analysis/")
-library(stringi)
-### 
+### Plot of the Global Active Power as a function of time in the household power consumption dataset,
 ### only using the two given days 1/2/2007 and 2/2/2007, and saving the resulting 
 ### histogram to plot1.png
 
@@ -18,8 +17,6 @@ rel_data <- rbind(rel_data$`1/2/2007`, rel_data$`2/2/2007`)
 #converted_date_time <- vector(mode = "list", length = length(rel_data$Date))
 rel_data$DateTime <- strptime(paste(rel_data$Date, rel_data$Time), format = "%d/%m/%Y %H:%M:%S")
 
-
-
-#png("plot2.png")
+png("plot2.png")
 plot(rel_data$DateTime, rel_data$Global_active_power, type="l", ylab="Global Active Power (kilowatts)", xlab=" " )
-#dev.off()
+dev.off()
