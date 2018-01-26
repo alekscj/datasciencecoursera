@@ -12,6 +12,6 @@ rel_data <- rbind(split_data$`1/2/2007`, split_data$`2/2/2007`)
 
 global_active <- rel_data$Global_active_power
 
-png("plot1.png")
+png("plot1.png", width=480, height=480)
 hist(global_active, col="red", xlab="Global Active Power (kilowatts)", main="Global Active Power")
 dev.off()

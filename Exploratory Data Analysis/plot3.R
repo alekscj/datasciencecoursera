@@ -11,7 +11,7 @@ rel_data <- rbind(rel_data$`1/2/2007`, rel_data$`2/2/2007`)
 
 rel_data$DateTime <- strptime(paste(rel_data$Date, rel_data$Time), format = "%d/%m/%Y %H:%M:%S")
 
-png("plot3.png")
+png("plot3.png", width=480, height=480)
 plot(rel_data$DateTime, rel_data$Sub_metering_1, type="l", col="black", ylab="Energy sub metering", xlab=" " )
 lines(rel_data$DateTime, rel_data$Sub_metering_2, col="red")
 lines(rel_data$DateTime, rel_data$Sub_metering_3, col="blue")
