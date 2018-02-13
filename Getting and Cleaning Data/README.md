@@ -1,6 +1,6 @@
 ### Getting and Cleaining Data
 
-# README describing the steps taken to clean and order the data given in the Course project for "Getting and Cleaning Data" in Coursera's Data Science specialization
+### README describing the steps taken to clean and order the data given in the Course project for "Getting and Cleaning Data" in Coursera's Data Science specialization
 
 Packages used: dplyr, installed using install.packages("dplyr")
 
