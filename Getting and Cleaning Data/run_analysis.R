@@ -69,7 +69,6 @@ names(relevant_data) <- c(rel_names_desc, "Activity_Label", "Subject")
 ### Grouping the data by subject and activity: 
 
 grouped_data <- relevant_data %>% group_by(Subject, Activity_Label)
-indices <- lapply(rel_names_desc, grep, names(grouped_data))
 summary <- summarize_all(grouped_data, mean)
 
 
