@@ -73,4 +73,4 @@ summary <- summarize_all(grouped_data, mean)
 
 
 ### Writing the tidyed table to file
-write.table(summary, file="tidy.txt")
+write.table(summary, file="tidy.txt", row.names = FALSE)
