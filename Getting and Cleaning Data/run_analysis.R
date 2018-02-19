@@ -1,8 +1,8 @@
 library(dplyr)
 library(stringr)
-path <- "C:/Users/sara.jonvik/Documents/datasciencecoursera/Getting and Cleaning Data/UCI HAR Dataset"
-test_path <- "C:/Users/sara.jonvik/Documents/datasciencecoursera/Getting and Cleaning Data/UCI HAR Dataset/test"
-train_path <- "C:/Users/sara.jonvik/Documents/datasciencecoursera/Getting and Cleaning Data/UCI HAR Dataset/train"
+path <- "UCI HAR Dataset"
+test_path <- "UCI HAR Dataset/test"
+train_path <- "UCI HAR Dataset/train"
 file_ext <- ".txt"
 
 ### Reading training and test data
@@ -10,6 +10,9 @@ x_train_path <- paste(c(train_path, "/X_train", file_ext), sep= "", collapse="")
 y_train_path <- paste(c(train_path, "/y_train", file_ext), sep= "", collapse="")
 x_test_path  <- paste(c(test_path, "/X_test", file_ext), sep= "", collapse="")
 y_test_path  <- paste(c(test_path, "/y_test", file_ext), sep= "", collapse="" )
+subj_inf_train_path <- paste(c(train_path, "/subject_train.txt"), sep= "", collapse="")
+subj_inf_test_path <- paste(c(test_path, "/subject_test.txt"), sep= "", collapse="")
+
 
 ### Reading in the labels of the data
 labels_path <- paste(path, "/features.txt", sep="", collapse="")
@@ -25,13 +28,25 @@ x_train <- data.frame(read.table(x_train_path))
 x_test  <- data.frame(read.table(x_test_path))
 y_train <- data.frame(read.table(y_train_path))
 y_test  <- data.frame(read.table(y_test_path))
+subject_information_train <- data.frame(read.table(subj_inf_train_path))
+subject_information_test <- data.frame(read.table(subj_inf_test_path))
 
-rel_train_data <- cbind(x_train[, c(grep("std()", labels), grep("mean()", labels))], y_train)
-rel_test_data <- cbind(x_test[, c(grep("std()", labels), grep("mean()", labels))], y_test)
+### Adding the subject information to the training and test d ata
+x_train <- cbind(x_train, subject_information_train)
+x_test <- cbind(x_test, subject_information_test)
 
+
+### Extracting only columns with information on the standard deviation and mean 
+### of the measurements
+rel_train_data <- cbind(x_train[, c(grep("std()", labels), grep("mean()", labels), ncol(x_train))], y_train)
+rel_test_data  <- cbind(x_test[, c(grep("std()", labels), grep("mean()", labels), ncol(x_train))], y_test)
+
+
+### Combining train and test data
 relevant_data <- rbind(rel_test_data, rel_train_data)
-names(relevant_data) <- c(rel_names)
 
+
+### Exchanging the original names with more descriptive ones
 rel_names_desc <- gsub("BodyBody", "Body", rel_names)
 rel_names_desc <- gsub("BodyAcc", "Body_Acceleration.", rel_names_desc)
 rel_names_desc <- gsub("BodyGyro", "Body_Gyroskope.", rel_names_desc)
@@ -48,5 +63,15 @@ rel_names_desc <- gsub("-X", "X-direction" , rel_names_desc)
 rel_names_desc <- gsub("-Y", "Y-direction" , rel_names_desc)
 rel_names_desc <- gsub("-Z", "Z-direction" , rel_names_desc)
 rel_names_desc <- gsub("[()]", "",rel_names_desc)
-names(relevant_data) <- c(rel_names_desc, "Activity_Label")
+names(relevant_data) <- c(rel_names_desc, "Activity_Label", "Subject")
 
+
+### Grouping the data by subject and activity: 
+
+grouped_data <- relevant_data %>% group_by(Subject, Activity_Label)
+indices <- lapply(rel_names_desc, grep, names(grouped_data))
+summary <- summarize_all(grouped_data, mean)
+
+
+### Writing the tidyed table to file
+write.table(summary, file="tidy.txt")
