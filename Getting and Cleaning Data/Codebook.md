@@ -17,7 +17,7 @@
     Standard deviation of the data read off the gyroskope in the cellphones in
     the X, Y or Z direction in the time domain
 
-##### Time_Domain.Body_Gyroskope.Jerk.standard_deviation.X-direction:
+##### Time_Domain.Body_Gyroskope.Jerk.standard_deviation.(XYZ)-direction:
     Standard deviation of the gyroskope jerk of the body in the X, Y or Z
     direction in the time domain
 
@@ -119,7 +119,6 @@
     Mean value of the jerk of the body in the X, Y or Z
     direction in the frequency domain (fourier transformed)
 
-
 ##### Frequency_Domain.Body_Acceleration.Jerk.mean_frequency_value.(XYZ)-direction:
 
 ##### Frequency_Domain.Body_Gyroskope.mean_value.(XYZ)-direction:
@@ -155,9 +154,13 @@ with a euclidian magnitude, in the frequency domain (fourier trainsformed).
 
 ##### Activity_Label:
     Labels on the activity performed as the data was read
-    1 - WALKING
-    2 - WALKING_UPSTAIRS
-    3 - WALKING_DOWNSTAIRS
-    4 - SITTING
-    5 - STANDING
-    6 - LAYING
+    1 - Walking
+    2 - Walking upstairs
+    3 - Walking downstairs
+    4 - Sitting
+    5 - Standing
+    6 - Laying
+
+##### Subject:
+    Subject number corresponding to which cellphone the measuerements
+    were performed with, between 1 and 30

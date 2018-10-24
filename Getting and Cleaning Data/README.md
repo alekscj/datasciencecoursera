@@ -14,7 +14,8 @@ and merged to one complete set.
   * The data containing information on the mean and
 standard deviation was extracted to a separate set
   * The labels of the data was exchanged with more descriptive names.
-  * A second dataset was constructed from the average values of all other variables
+  * A final data set is created as a summary of the given data. It contains one measurement for each activity and each subject given by the mean of the multiple measurements done in the original
+  dataset. This table is given in tidy.csv
 
 The R-code performing the steps above can be found in run_analysis.R
 
@@ -24,6 +25,6 @@ separators between "information", in a way. For example,
 Time_Domain.Body_Acceleration.standard_deviation.X-direction
 
 gives the standard deviation of the body acceleration given in the time domain
-(not fourier transformed) in the X-direction. All names in the tidyed.txt file is
+(not fourier transformed) in the X-direction. All names in the tidy.csv file is
 given in this way, constructed using regular expressions and the gsub-function in
 R (see line 34 to 50 in code)
