@@ -1,5 +1,9 @@
 C:/Users/sara.jonvik/Documents/datasciencecoursera/Data science toolbox and introduction to R/*.txt
+
 C:/Users/sara.jonvik/Documents/datasciencecoursera/Exploratory Data Analysis/*.txt
-*.csv
-*.RData
-*.pdf
+
+**/*.csv
+
+**/*.RData
+
+**/*.pdf
