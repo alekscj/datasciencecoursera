@@ -18,7 +18,13 @@ steps_per_day <-aggregate(data$steps, by=list(data$date), FUN=sum)
 mean_steps_per_day <- mean(steps_per_day$x, na.rm = TRUE)
 median_steps_per_day <- median(steps_per_day$x, na.rm = TRUE)
 
-q <- qplot(steps_per_day$x, main = 'Steps per day', xlab = 'Number of steps per day', geom = 'histogram', binwidth = 2500,col=I("blue"), fill=I("light blue"))
+q <- qplot(steps_per_day$x, 
+           main = 'Steps per day', 
+           xlab = 'Number of steps per day', 
+           geom = 'histogram', 
+           binwidth = 2500,
+           col = I("blue"), 
+           fill = I("light blue"))
 print(q)
 
 ```
@@ -54,7 +60,13 @@ steps_per_day <-aggregate(data$steps, by=list(data$date), FUN=sum)
 mean_steps_per_day <- mean(steps_per_day$x, na.rm = TRUE)
 median_steps_per_day <- median(steps_per_day$x, na.rm = TRUE)
 
-q <- qplot(steps_per_day$x, main = 'Steps per day', xlab = 'Number of steps per day', geom = 'histogram', binwidth = 2500,col=I("blue"), fill=I("light blue"))
+q <- qplot(steps_per_day$x, 
+           main = 'Steps per day', 
+           xlab = 'Number of steps per day', 
+           geom = 'histogram', 
+           binwidth = 2500,
+           col = I("blue"), 
+           fill = I("light blue"))
 print(q)
 ```
 
@@ -64,7 +76,11 @@ The new mean and median of the data set with the missing values replaced by aver
 
 Plotting a line plot over of the average number of steps in every 5 min interval (y-axis) agains the interval number (x-axis)
 ```{r}
-q1 <- qplot(five_min_intervals$Interval, five_min_intervals$`Average number of steps`, xlab='Interval number', ylab = 'Number of steps', main = 'Averaged number of steps in each 5 min interval', geom  = 'line')
+q1 <- qplot(five_min_intervals$Interval, five_min_intervals$`Average number of steps`, 
+            xlab = 'Interval number', 
+            ylab = 'Number of steps', 
+            main = 'Averaged number of steps in each 5 min interval', 
+            geom  = 'line')
 print(q1)
 
 interval_with_max_numer_of_steps <- max(five_min_intervals)
@@ -81,12 +97,24 @@ data$weekend = chron::is.weekend(data$date)
 weekday <- data[!data$weekend, ]
 weekday <- aggregate(weekday$steps, by=list(weekday$interval), FUN=mean)
 names(weekday) <- c("Interval", "Average number of steps")
-q2 <- qplot(weekday$Interval, weekday$`Average number of steps`, xlab='Interval number', ylab = 'Number of steps', main = 'Averaged number of steps in each 5 min interval - Weekdays', geom = 'line')
+
+q2 <- qplot(weekday$Interval, weekday$`Average number of steps`, 
+            xlab = 'Interval number', 
+            ylab = 'Number of steps', 
+            main = 'Averaged number of steps in each 5 min interval - Weekdays', 
+            geom = 'line')
 
 weekend <- data[data$weekend, ]
 weekend <- aggregate(weekend$steps, by=list(weekend$interval), FUN=mean)
 names(weekend) <- c("Interval", "Average number of steps")
-q3 <- qplot(weekend$Interval, weekend$`Average number of steps`, xlab='Interval number', ylab = 'Number of steps', main = 'Averaged number of steps in each 5 min interval - Weekends', geom = 'line')
+
+q3 <- qplot(weekend$Interval, weekend$`Average number of steps`, 
+            xlab='Interval number', 
+            ylab = 'Number of steps', 
+            main = 'Averaged number of steps in each 5 min interval - Weekends', 
+            geom = 'line')
 
 q4 <- grid.arrange(q2, q3)
 ```
+
+The activity pattern during weekends appear to be much more spread out across the day than during the weekdays. Weekdays have much more of a clear peak around the 800th 5-min interval
